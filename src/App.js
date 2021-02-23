@@ -4,6 +4,7 @@ import './App.css';
 import { db, auth } from './firebase';
 import ImageUpload from './ImageUpload';
 import Post from './Post';
+import InstagramEmbed from 'react-instagram-embed';
 
 function getModalStyle() {
   const top = 50;
@@ -59,7 +60,7 @@ function App() {
 
 
   useEffect(() => {
-    db.collection('posts').onSnapshot(snapshot => {
+    db.collection('posts').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
       setPosts(snapshot.docs.map(doc => ({
         id: doc.id,
         post: doc.data()
@@ -200,10 +201,25 @@ function App() {
       <div className="app_post">
         {
           posts.map(({ id, post }) => (
-            <Post key={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
+            <Post key={id} postId={id} user={user} username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
           ))
         }
       </div>
+
+
+      <InstagramEmbed
+        url='https://instagr.am/p/Zw9o4/'
+        clientAccessToken='123|456'
+        maxWidth={320}
+        hideCaption={false}
+        containerTagName='div'
+        protocol=''
+        injectScript
+        onLoading={() => { }}
+        onSuccess={() => { }}
+        onAfterRender={() => { }}
+        onFailure={() => { }}
+      />
     </div>
   );
 }
