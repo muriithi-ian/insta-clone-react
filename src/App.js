@@ -2,6 +2,7 @@ import { Button, Input, makeStyles, Modal } from '@material-ui/core';
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { db, auth } from './firebase';
+import ImageUpload from './ImageUpload';
 import Post from './Post';
 
 function getModalStyle() {
@@ -188,7 +189,13 @@ function App() {
           )}
       </div>
 
-
+      <div className="app_addPost">
+        {user?.displayName ? (
+          <ImageUpload username={user.displayName} />
+        ) : (
+            <h3>Sorry, you need to login to upload post</h3>
+          )}
+      </div>
 
       <div className="app_post">
         {
@@ -197,7 +204,6 @@ function App() {
           ))
         }
       </div>
-
     </div>
   );
 }
