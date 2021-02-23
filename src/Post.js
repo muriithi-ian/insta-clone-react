@@ -16,7 +16,7 @@ function Post({ username, caption, imageUrl }) {
                 <h3>{username}</h3>
             </div>
             <img
-                src="https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/HB4AT3D3IMI6TMPTWIZ74WAR54.jpg"
+                src={imageUrl}
                 alt=""
                 className="post_image"
             />
